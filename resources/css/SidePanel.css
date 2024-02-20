@@ -1,0 +1,9 @@
+aside {
+    width: 160px; /* Ancho del panel lateral */
+    height: 100%; /* Altura del panel lateral (opcional) */
+    background-color: #ffffff; /* Color de fondo del panel lateral */ /* Espaciado interno del panel lateral */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el panel */
+    position: fixed;
+    left: 0;
+    top: 65px;
+}
