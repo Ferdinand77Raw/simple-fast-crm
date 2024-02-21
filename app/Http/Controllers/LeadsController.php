@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Leads;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class LeadsController extends Controller
 {
@@ -12,7 +14,9 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Leads/Leads', [
+            
+        ]);
     }
 
     /**

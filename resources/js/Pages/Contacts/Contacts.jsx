@@ -1,10 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContactForm from './ContactForm';
 import { useState } from 'react';
-import './Contacts.css';
 import SidePanel from '@/Components/SidePanel';
 import { FaTrashAlt } from 'react-icons/fa';
 import { FaPen } from "react-icons/fa";
+import './../../../css/forms.css';
 
 export default function Contacts({ auth }) {
     const [contacts, setContacts] = useState([]);
@@ -34,7 +34,7 @@ export default function Contacts({ auth }) {
             <SidePanel></SidePanel>
             <div className="contacts-container">
                 <ContactForm onSubmit={editingContact ? editContact : addContact} contactToEdit={editingContact} onDelete={deleteContact} />
-                <table align='center'className='contact-table'>
+                <table align='center'className='new-table'>
                     <thead>
                         <tr>
                             <th>Name</th>

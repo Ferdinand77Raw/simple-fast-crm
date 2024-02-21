@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,4 +44,9 @@ class Users extends Model
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function contacts(): HasMany
+    {
+        return $this->HasMany(Contacts::class);
+    }
 }

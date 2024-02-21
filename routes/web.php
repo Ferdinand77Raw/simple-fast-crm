@@ -40,15 +40,15 @@ Route::resource('contacts', ContactsController::class)
         ->only(['index', 'store'])
         ->middleware(['auth', 'verified']);
 
-Route::resource('/leads', LeadsController::class)
+Route::resource('leads', LeadsController::class)
         ->only(['index', 'store'])
         ->middleware(['auth', 'verified']);
 
-Route::resource('/products', ProductsController::class)
+Route::resource('products', ProductsController::class)
         ->only(['index', 'store'])
         ->middleware(['auth', 'verified']);
 
-Route::resource('/invoices', InvoicesController::class)
+Route::resource('invoices', InvoicesController::class)
         ->only(['index', 'store'])
         ->middleware(['auth', 'verified']);
 

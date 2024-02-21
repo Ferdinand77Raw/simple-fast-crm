@@ -11,13 +11,13 @@ const SidePanel = () => {
                     <NavLink href={route('contacts.index')} active={route().current('contacts.index')}>Contacts</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="#">Leads</NavLink>
+                    <NavLink href={route('leads.index')} active={route().current('leads.index')}>Leads</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="#">Products</NavLink>
+                    <NavLink href={route('products.index')} active={route().current('products.index')}>Products</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="#">Invoices</NavLink>
+                    <NavLink href={route('invoices.index')} active={route().current('invoices.index')}>Invoices</NavLink>
                 </NavItem>
             </Nav>
         </aside>

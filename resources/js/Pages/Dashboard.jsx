@@ -3,6 +3,7 @@ import SidePanel from '../Components/SidePanel';
 
 export default function Dashboard({ auth }) {
     return (
+        
         <AuthenticatedLayout
             user={auth.user}
         >

@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():Response
     {
-        //
+        return Inertia::render('Products/Products', [
+            
+        ]);
     }
 
     /**

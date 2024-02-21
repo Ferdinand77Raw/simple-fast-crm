@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import './Contacts.css';
-
+import '../../../css/forms.css';
 
 const ContactForm = ({ onSubmit, contactToEdit, onDelete }) => {
     const { register, handleSubmit, setValue, reset } = useForm();
@@ -26,7 +25,7 @@ const ContactForm = ({ onSubmit, contactToEdit, onDelete }) => {
     }, [contactToEdit, setValue]);
 
     return (
-        <div className='contact-form'>
+        <div className='new-form'>
             <form onSubmit={handleSubmit(submitHandler)}>
                 <ul className="list-inline">
                     <li className="list-inline-item">
@@ -60,7 +59,7 @@ const ContactForm = ({ onSubmit, contactToEdit, onDelete }) => {
                     </li>
                     <li className="list-inline-item">
                         <button type="submit" className="btn btn-primary btn-save">
-                            Guardar
+                            Save
                         </button>
                     </li>
 
@@ -72,7 +71,7 @@ const ContactForm = ({ onSubmit, contactToEdit, onDelete }) => {
                                     onClick={deleteHandler}
                                     className="btn btn-danger"
                                 >
-                                    Eliminar
+                                    Delete
                                 </button>
                             </div>
                         )}
