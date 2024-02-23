@@ -6,8 +6,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { FaPen } from "react-icons/fa";
 import './../../../css/forms.css';
 
-export default function Contacts({ auth }) {
-    const [contacts, setContacts] = useState([]);
+export default function Contacts({ auth, contacts }) {
     const [editingContact, setEditingContact] = useState(null);
 
     const addContact = (newContact) => {
@@ -20,6 +19,7 @@ export default function Contacts({ auth }) {
                 contact.id === editedContact.id ? editedContact : contact
             )
         );
+        patch(route('contacts.update', contacts.id), { onSuccess: () => setEditingContact(false) });
         setEditingContact(null);
     };
 
@@ -29,11 +29,14 @@ export default function Contacts({ auth }) {
         );
         setEditingContact(null);
     };
+
     return (
         <AuthenticatedLayout user={auth.user}>
             <SidePanel></SidePanel>
             <div className="contacts-container">
-                <ContactForm onSubmit={editingContact ? editContact : addContact} contactToEdit={editingContact} onDelete={deleteContact} />
+                <button className="add-element">
+                    <a href={route('contacts.create')}>Add contact</a>
+                </button>
                 <table align='center'className='new-table'>
                     <thead>
                         <tr>
@@ -42,6 +45,8 @@ export default function Contacts({ auth }) {
                             <th>Phone Number</th>
                             <th>City</th>
                             <th>State/Province</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -53,6 +58,9 @@ export default function Contacts({ auth }) {
                                 <td>{contact.phone_number}</td>
                                 <td>{contact.city}</td>
                                 <td>{contact.state}</td>
+                                <td>{contact.created_at}</td>
+                                <td>{contact.updated_at}</td>
+
                                 <td>
                                     <button className="btn btn-primary" onClick={() => setEditingContact(contact)}>
                                         <FaPen />

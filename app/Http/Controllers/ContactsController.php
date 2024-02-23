@@ -16,7 +16,7 @@ class ContactsController extends Controller
     public function index(): Response 
     {
         return Inertia::render('Contacts/Contacts', [
-            'contacts' => Contacts::with('user:id, name, lastname, city, state, user_id, created_at, updated_at')
+            'contacts' => Contacts::with('users')->get(['id', 'name', 'lastname', 'phone_number', 'city', 'state', 'user_id', 'created_at', 'updated_at'])
         ]);
     }
 
@@ -25,7 +25,9 @@ class ContactsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Contacts/ContactForm',[
+
+        ]);
     }
 
     /**
@@ -33,18 +35,25 @@ class ContactsController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        logger()->info('Received request to store contact', $request->all());
+        
+        $user_id = $request->user()->id;
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'phone_number' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
-            'user_id' => 'required|integer',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime'
+            'created_at' => 'date_format:Y-m-d',
+            'updated_at' => 'date_format:Y-m-d'
         ]);
+
+        $validated['user_id'] = $user_id;
  
         $request->user()->contacts()->create($validated);
+
+        //Contacts::create($validated);
  
         return redirect(route('contacts.index'));
     }
@@ -54,7 +63,7 @@ class ContactsController extends Controller
      */
     public function show(Contacts $contacts)
     {
-        //
+
     }
 
     /**
@@ -62,7 +71,9 @@ class ContactsController extends Controller
      */
     public function edit(Contacts $contacts)
     {
-        //
+        return Inertia::render('Contacts/ContactEdit',[
+
+        ]);
     }
 
     /**

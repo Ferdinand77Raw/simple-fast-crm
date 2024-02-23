@@ -44,4 +44,17 @@
   .btn-save:hover {
     background-color: lightgreen;
   }
+
+  .add-element{
+    margin-top: 50px;
+    margin-left: 250px;
+    width: 150px;
+    background-color: rgb(93, 133, 255);
+    border-radius: 15px;
+    border: 2px black;
+  }
+
+  .plus-button{
+    width: 100px;
+  }
   
