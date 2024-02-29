@@ -71,17 +71,32 @@ class ContactsController extends Controller
      */
     public function edit(Contacts $contacts)
     {
-        return Inertia::render('Contacts/ContactEdit',[
+        $contact = Contacts::findOrFail($contacts);
 
+        return Inertia::render('Contacts/ContactEdit',[
+            'contacts' => $contact
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contacts $contacts)
+    public function update(Request $request, Contacts $contacts): RedirectResponse
     {
-        //
+        $this->authorize('update', $contacts);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'updated_at' => 'date_format:Y-m-d'
+        ]);
+
+        $contacts->update($validated);  
+
+        return redirect(route('contacts.index'));
     }
 
     /**

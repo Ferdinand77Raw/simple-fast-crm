@@ -37,19 +37,19 @@ Route::get('/dashboard', function () {
 /**MODULES ROUTES**/
 
 Route::resource('contacts', ContactsController::class)
-        ->only(['index', 'create', 'store', 'update', 'destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->middleware(['auth', 'verified']);
 
 Route::resource('leads', LeadsController::class)
-        ->only(['index', 'create', 'store', 'update', 'destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->middleware(['auth', 'verified']);
 
 Route::resource('products', ProductsController::class)
-        ->only(['index', 'create', 'store', 'update', 'destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->middleware(['auth', 'verified']);
 
 Route::resource('invoices', InvoicesController::class)
-        ->only(['index', 'create', 'store', 'update', 'destroy'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
         ->middleware(['auth', 'verified']);
 
 

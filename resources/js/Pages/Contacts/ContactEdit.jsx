@@ -8,9 +8,15 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 
-export default function ContactForm({ onSubmit, contactToEdit, onDelete, auth }) {
+export default function ContactForm({contact}) {
+
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
+
+    const { auth } = usePage().props;
+ 
+    console.log(auth);
+    console.log(contact);
 
     const { data, setData, processing, errors, reset, patch } = useForm({
         name: '',
@@ -22,17 +28,12 @@ export default function ContactForm({ onSubmit, contactToEdit, onDelete, auth })
     });
 
     const submitHandler = (e) => {
-        patch(route('contacts.update'));
-    };
+        e.preventDefault();
+        patch(route('contacts.update', contact.id), {
+            onSuccess: () => reset()
+        });
 
-    // Cuando se recibe un contacto para editar, establecer los valores iniciales del formulario
-    React.useEffect(() => {
-        if (contactToEdit) {
-            Object.keys(contactToEdit).forEach((key) => {
-                setData(key, contactToEdit[key]);
-            });
-        }
-    }, [contactToEdit, setData]);
+    };
 
     return (
         <AuthenticatedLayout user={auth.user}
@@ -44,7 +45,7 @@ export default function ContactForm({ onSubmit, contactToEdit, onDelete, auth })
         >
             <Head title="Contacts" />
             <div className='new-form'>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} method='PATCH'>
                     <ul className="list-inline">
                         <li className="list-inline-item">
                             <InputLabel htmlFor="name" value="Name" />
