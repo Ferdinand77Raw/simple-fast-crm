@@ -26,7 +26,7 @@ export default function ContactForm({ onSubmit, contactToEdit, onDelete, auth })
         e.preventDefault();
 
         post(route('contacts.store'));
-        onSubmit(data);
+        //onSubmit(data);
         reset(); // Limpiar el formulario después de enviar
     };
 

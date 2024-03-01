@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import Checkbox from '@/Components/Checkbox';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
@@ -12,9 +13,9 @@ export default function Register() {
         last_name: '',
         username: '',
         email: '',
-        isAdmin: 1,
+        isAdmin: 0,
         password: '',
-        role_id: 1,
+        role_id: '',
         password_confirmation: '',
     });
 
@@ -28,7 +29,7 @@ export default function Register() {
         e.preventDefault();
 
         post(route('register'));
-        console.log(data.name + " " + data.last_name + " " + data.username + " " + data.role_id + " " + data.email + " " + data.password + " " + data.password_confirmation);
+        console.log(data.name + " " + data.last_name + " " + data.username + " " + data.role_id + " " + data.isAdmin + " " + data.email + " " + data.password + " " + data.password_confirmation);
     };
 
     return (
@@ -105,6 +106,11 @@ export default function Register() {
                         <option value={4}>Customer care</option>
                         <option value={5}>Sales Representative</option>
                     </select>
+                </div>
+
+                <div className='mt-4'>
+                    <InputLabel htmlFor="isAdmin" value="Is Admin" />
+                    <Checkbox checked={data.isAdmin} onChange={() => setData('isAdmin', !data.isAdmin)} />
                 </div>
 
                 <div className="mt-4">

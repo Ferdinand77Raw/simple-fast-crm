@@ -73,9 +73,7 @@ class ContactsController extends Controller
     {
         $contact = Contacts::findOrFail($contacts);
 
-        return Inertia::render('Contacts/ContactEdit',[
-            'contacts' => $contact
-        ]);
+        return Inertia::render('Contacts/ContactEdit');
     }
 
     /**

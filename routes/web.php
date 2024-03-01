@@ -34,6 +34,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/user/{id}/username', [UserController::class, 'getUserNameById']);
+
 /**MODULES ROUTES**/
 
 Route::resource('contacts', ContactsController::class)

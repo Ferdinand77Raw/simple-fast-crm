@@ -8,15 +8,23 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 
-export default function ContactForm({contact}) {
+export default function ContactForm({ contact }) {
+
+    // Obtener la URL actual
+    const currentUrl = window.location.href;
+
+    // Dividir la URL en partes utilizando '/' como separador
+    const parts = currentUrl.split('/');
+
+    // El ID del contacto estará en la posición 4 del array 'parts' en este caso
+    const contactId = parts[4];
+
+    console.log(contactId);
 
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
 
     const { auth } = usePage().props;
- 
-    console.log(auth);
-    console.log(contact);
 
     const { data, setData, processing, errors, reset, patch } = useForm({
         name: '',
@@ -29,7 +37,7 @@ export default function ContactForm({contact}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        patch(route('contacts.update', contact.id), {
+        patch(route('contacts.update', contactId), {
             onSuccess: () => reset()
         });
 
@@ -45,7 +53,7 @@ export default function ContactForm({contact}) {
         >
             <Head title="Contacts" />
             <div className='new-form'>
-                <form onSubmit={submitHandler} method='PATCH'>
+                <form onSubmit={submitHandler}>
                     <ul className="list-inline">
                         <li className="list-inline-item">
                             <InputLabel htmlFor="name" value="Name" />

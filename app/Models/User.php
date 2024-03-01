@@ -53,4 +53,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contacts::class);
     }
+
+    public function getUserNameById($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            return response()->json(['username' => $user->username]);
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    }
 }

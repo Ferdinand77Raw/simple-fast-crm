@@ -4,10 +4,14 @@ import NavLink from '@/Components/NavLink';
 import { useState } from 'react';
 import SidePanel from '@/Components/SidePanel';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import './../../../css/forms.css';
+import dayjs from 'dayjs';
+dayjs.extend(relativeTime);
 
 export default function Contacts({ auth, contacts }) {
     const [editingContact, setEditingContact] = useState(null);
+    const [editing, setEditing] = useState(false);
 
     const deleteContact = (contactId) => {
         setContacts((prevContacts) =>
@@ -33,6 +37,7 @@ export default function Contacts({ auth, contacts }) {
                             <th>State/Province</th>
                             <th>Created at</th>
                             <th>Updated at</th>
+                            <th>Assigned User</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,13 +49,17 @@ export default function Contacts({ auth, contacts }) {
                                 <td>{contact.phone_number}</td>
                                 <td>{contact.city}</td>
                                 <td>{contact.state}</td>
-                                <td>{contact.created_at}</td>
-                                <td>{contact.updated_at}</td>
+                                <td>{dayjs(contact.created_at).fromNow()}</td>
+                                <td>{dayjs(contact.updated_at).fromNow()}</td>
+                                <td>{contact.user_id}</td>
 
                                 <td>
                                     <NavLink href={route('contacts.edit', { contact: contact.id })}>
-                                        <FaPen />
+                                        <button>
+                                            <FaPen />
+                                        </button>
                                     </NavLink>
+
                                 </td>
                                 <td>
                                     <NavLink>
